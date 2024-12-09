@@ -6,11 +6,11 @@ class SigninOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          height: 60,
-          width: 170,
+          height: 50,
+          width: 150,
           decoration: BoxDecoration(
               color: const Color.fromARGB(214, 238, 238, 238),
               borderRadius: BorderRadius.circular(20)),
@@ -32,10 +32,10 @@ class SigninOptions extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 20),
+        SizedBox(width: 40),
         Container(
-          height: 60,
-          width: 170,
+          height: 50,
+          width: 150,
           decoration: BoxDecoration(
               color: const Color.fromARGB(214, 238, 238, 238),
               borderRadius: BorderRadius.circular(20)),

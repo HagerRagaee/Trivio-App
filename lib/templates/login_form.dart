@@ -27,38 +27,38 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(50.0),
-      child: ListView(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Welcome Back",
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
+    return ListView(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Welcome Back",
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(width: 10),
-              Image.asset(
-                "images/quiz2.png",
-                height: 35,
-              )
-            ],
-          ),
-          SizedBox(height: 10),
-          Text(
-            "Enter your details below",
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.grey[500],
             ),
-            textAlign: TextAlign.center,
+            SizedBox(width: 10),
+            Image.asset(
+              "images/quiz2.png",
+              height: 35,
+            )
+          ],
+        ),
+        SizedBox(height: 10),
+        Text(
+          "Enter your details below",
+          style: TextStyle(
+            fontSize: 15,
+            color: Colors.grey[500],
           ),
-          SizedBox(height: 25),
-          Form(
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 25),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Form(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -79,37 +79,40 @@ class _LoginFormState extends State<LoginForm> {
               ],
             ),
           ),
-          SizedBox(height: 40),
-          Text(
-            "Forget your password? ",
-            style: TextStyle(color: Colors.grey[600]),
-            textAlign: TextAlign.center,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Don`t have an account?",
-                style: TextStyle(color: Colors.grey[600]),
-              ),
-              TextButton(
-                child: Text(
-                  "Sign up",
-                  style: TextStyle(
-                    color: Colors.deepPurple,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
+        ),
+        SizedBox(height: 20),
+        Text(
+          "Forget your password? ",
+          style: TextStyle(color: Colors.grey[600]),
+          textAlign: TextAlign.center,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Don`t have an account?",
+              style: TextStyle(color: Colors.grey[600]),
+            ),
+            TextButton(
+              child: Text(
+                "Sign up",
+                style: TextStyle(
+                  color: Colors.deepPurple,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
                 ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SignUpPage()));
-                },
-              )
-            ],
-          ),
-          SizedBox(height: 40),
-          Row(
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SignUpPage()));
+              },
+            )
+          ],
+        ),
+        SizedBox(height: 30),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
             children: [
               Expanded(
                 child: Divider(
@@ -132,10 +135,10 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ],
           ),
-          SizedBox(height: 40),
-          SigninOptions()
-        ],
-      ),
+        ),
+        SizedBox(height: 20),
+        SigninOptions()
+      ],
     );
   }
 }
