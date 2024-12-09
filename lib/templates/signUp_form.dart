@@ -3,6 +3,7 @@ import 'package:quiz_app/Data/authentication_data.dart';
 import 'package:quiz_app/pages/login_page.dart';
 import 'package:quiz_app/structure/button_builder.dart';
 import 'package:quiz_app/structure/textField_builder.dart';
+import 'package:fancy_password_field/fancy_password_field.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -14,7 +15,8 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPassword = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController nameController = TextEditingController();
 
   late AuthenticationActions authenticationActions;
@@ -80,12 +82,23 @@ class _SignUpFormState extends State<SignUpForm> {
                   fieldName: "Email",
                 ),
                 const SizedBox(height: 20),
-                TextFieldBuilder(
-                  validator: (val) => val == null || val.isEmpty
-                      ? "This field is required!"
-                      : null,
+                FancyPasswordField(
+                  hasStrengthIndicator: true,
                   controller: passwordController,
-                  fieldName: "Password",
+                  validationRules: {
+                    DigitValidationRule(),
+                    UppercaseValidationRule(),
+                    LowercaseValidationRule(),
+                    SpecialCharacterValidationRule(),
+                    MinCharactersValidationRule(6),
+                    MaxCharactersValidationRule(12),
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password is required!";
+                    }
+                    return null; // This will check validation rules
+                  },
                 ),
                 const SizedBox(height: 20),
                 TextFieldBuilder(
@@ -98,7 +111,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     }
                     return null;
                   },
-                  controller: confirmPassword,
+                  controller: confirmPasswordController,
                   fieldName: "Confirm Password",
                 ),
                 const SizedBox(height: 40),

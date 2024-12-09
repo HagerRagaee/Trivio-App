@@ -43,6 +43,7 @@ dependencies:
   awesome_dialog: ^3.2.1
   material_dialogs: ^1.1.5
   lottie: ^3.2.0
+  fancy_password_field: ^2.0.8
 
  
 

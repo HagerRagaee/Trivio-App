@@ -1,7 +1,12 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
 import 'package:quiz_app/Data/authentication_data.dart';
+import 'package:quiz_app/pages/login_page.dart';
 import 'package:quiz_app/pages/sign_up_page.dart';
 import 'package:quiz_app/structure/button_builder.dart';
 import 'package:quiz_app/structure/signIn_options.dart';
@@ -105,10 +110,42 @@ class _LoginFormState extends State<LoginForm> {
           ),
         ),
         SizedBox(height: 20),
-        Text(
-          "Forget your password? ",
-          style: TextStyle(color: Colors.grey[600]),
-          textAlign: TextAlign.center,
+        TextButton(
+          child: Text(
+            "Forget your password? ",
+            style: TextStyle(color: Colors.grey[600]),
+            textAlign: TextAlign.center,
+          ),
+          onPressed: () async {
+            if (emailController.text.length > 0) {
+              await FirebaseAuth.instance
+                  .sendPasswordResetEmail(email: emailController.text);
+              Dialogs.materialDialog(
+                  color: Colors.white,
+                  msg: 'Please check your email to reset your password.',
+                  title: 'Reset password',
+                  lottieBuilder: Lottie.asset(
+                    'images/dialog.json',
+                    fit: BoxFit.contain,
+                  ),
+                  context: context,
+                  actions: [
+                    IconsButton(
+                      onPressed: () {
+                        FirebaseAuth.instance.currentUser!
+                            .sendEmailVerification();
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => LoginPage()));
+                      },
+                      text: 'Reset your password',
+                      iconData: Icons.done,
+                      color: Colors.green,
+                      textStyle: const TextStyle(color: Colors.white),
+                      iconColor: Colors.white,
+                    ),
+                  ]);
+            }
+          },
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
