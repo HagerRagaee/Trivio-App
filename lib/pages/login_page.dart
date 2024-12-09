@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
                 "Trivio",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 30,
+                    fontSize: 35,
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),

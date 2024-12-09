@@ -18,6 +18,8 @@ class _LoginFormState extends State<LoginForm> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   late AuthenticationActions authenticationActions;
+
+  GlobalKey<FormState> formState = GlobalKey<FormState>();
   @override
   void initState() {
     authenticationActions =
@@ -59,23 +61,45 @@ class _LoginFormState extends State<LoginForm> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Form(
+            key: formState,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 TextFieldBuilder(
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return "This field is required!";
+                    }
+                    // Regular expression to validate email format
+                    final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+                    if (!emailRegex.hasMatch(val)) {
+                      return "Please enter a valid email address!";
+                    }
+                    return null;
+                  },
                   controller: emailController,
                   fieldName: "Email",
                 ),
                 SizedBox(height: 20),
                 TextFieldBuilder(
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return "field is required!";
+                    }
+
+                    return null;
+                  },
                   controller: passwordController,
                   fieldName: "Password",
                 ),
                 SizedBox(height: 20),
                 ButtonBuilder(
-                  buttonName: "Sign in",
-                  click: () => authenticationActions.signIn(context),
-                ),
+                    buttonName: "Sign in",
+                    click: () {
+                      if (formState.currentState!.validate()) {
+                        authenticationActions.signIn(context);
+                      }
+                    }),
               ],
             ),
           ),
